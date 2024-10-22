@@ -27,7 +27,7 @@ function! s:restoreHistory(histList)
   while i<histLen
     set hlsearch
     let @/=a:histList[i]
-    exe "silent! norm! /\<cr>"
+    exe "silent! call search('".@/."')\<cr>"
     let i+=1
   endwhile
   let @/=oldSearch
@@ -67,10 +67,10 @@ function! s:update(startPos, part)
       let matchPat = matchPat.'\c'
     endif
     let @/=matchPat
-    exe "silent! norm! /\<cr>"
+    exe "silent! call search('".@/."')\<cr>"
   endif
   set hlsearch
-  redraw
+  mode
   echo g:fuzzysearch_prompt . a:part
 endfunc
 
@@ -147,7 +147,7 @@ function! fuzzysearch#start_search()
   call setpos('.', startPos)
 
   if didSearch == 1
-    exe "silent! norm! /".@/."\<cr>"
+    exe "silent! call search('".@/."', 's')\<cr>"
   endif
 
   set hlsearch

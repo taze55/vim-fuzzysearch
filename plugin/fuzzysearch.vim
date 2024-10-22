@@ -70,7 +70,7 @@ function! s:update(startPos, part)
     exe "silent! call search('".@/."')\<cr>"
   endif
   set hlsearch
-  mode
+  redraw
   echo g:fuzzysearch_prompt . a:part
 endfunc
 
